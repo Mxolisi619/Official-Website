@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Official website of IAMLEGEND — music, videos, photographs and links." />
+  <title>IAMLEGEND — Official Site</title>
+  <style>
+    /* =========================================================
+       IAMLEGEND WEBSITE — EASY CUSTOMISATION
+       Change colours in :root. Update content in the CONFIG section
+       near the bottom of this file. Put your media in /media.
+       ========================================================= */
+    :root {
+      --bg: #090909;
+      --panel: #131313;
+      --text: #f4f1eb;
+      --muted: #a6a29c;
+      --line: #303030;
+      --accent: #d8ff3e;
+      --max-width: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(var(--max-width), calc(100% - 40px)); margin: auto; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(9,9,9,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-size: 1.25rem; letter-spacing: .16em; font-weight: 900; }
+    .logo span { color: var(--accent); }
+    .navlinks { display: flex; align-items: center; gap: 23px; flex-wrap: wrap; }
+    .navlinks a { color: var(--muted); font-size: .9rem; }
+    .navlinks a:hover, .text-link:hover { color: var(--accent); }
+    .menu-btn { display: none; border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 9px 12px; border-radius: 6px; }
+    .hero { min-height: 76vh; display: grid; align-items: center; padding: 90px 0 80px; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 75% 25%, #262626 0%, transparent 42%); }
+    .eyebrow { color: var(--accent); font-size: .75rem; letter-spacing: .24em; text-transform: uppercase; font-weight: bold; }
+    h1 { margin: 14px 0 18px; font-size: clamp(3.4rem, 10vw, 8.2rem); line-height: .9; letter-spacing: -.075em; max-width: 900px; }
+    h1 span { display: block; color: transparent; -webkit-text-stroke: 1px var(--text); }
+    .hero p { max-width: 520px; color: var(--muted); font-size: 1.05rem; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; padding: 12px 18px; border: 1px solid var(--accent); background: var(--accent); color: #101010; font-weight: 800; border-radius: 3px; }
+    .btn.secondary { background: transparent; color: var(--text); border-color: var(--line); }
+    .btn:hover { transform: translateY(-2px); }
+    section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 28px; }
+    h2 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: -.055em; line-height: 1; }
+    .section-note { color: var(--muted); font-size: .9rem; max-width: 360px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); overflow: hidden; min-width: 0; }
+    .media-frame { aspect-ratio: 4 / 3; background: #202020; display: grid; place-items: center; overflow: hidden; }
+    .media-frame img, .media-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .placeholder { color: #777; font-size: .82rem; text-align: center; padding: 20px; }
+    .card-body { padding: 16px; }
+    .card h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .audio-card { padding: 18px; }
+    .audio-card audio { width: 100%; margin-top: 14px; }
+    .tag { display: inline-block; color: var(--accent); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .video-frame { aspect-ratio: 16 / 9; background: #202020; }
+    .video-frame iframe, .video-frame video { width: 100%; height: 100%; border: 0; display: block; }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; }
+    .socials a { padding: 12px 16px; border: 1px solid var(--line); background: var(--panel); color: var(--text); }
+    .socials a:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-panel { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 28px; border: 1px solid var(--line); background: var(--panel); }
+    .contact-panel p { color: var(--muted); margin-bottom: 0; }
+    footer { padding: 26px 0; color: var(--muted); font-size: .82rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .hidden { display: none !important; }
+    @media (max-width: 760px) {
+      .nav { min-height: 64px; }
+      .menu-btn { display: block; }
+      .navlinks { display: none; position: absolute; top: 64px; left: 0; right: 0; padding: 18px 20px; background: #101010; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 16px; }
+      .navlinks.open { display: flex; }
+      .hero { min-height: 65vh; padding: 70px 0; }
+      section { padding: 58px 0; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: block; }
+      .section-note { margin-top: 12px; }
+      .contact-panel { display: block; }
+      .contact-panel .btn { margin-top: 18px; }
+    }
+    @media (max-width: 480px) { .wrap { width: min(var(--max-width), calc(100% - 28px)); } .grid { grid-template-columns: 1fr; } .media-frame { aspect-ratio: 5 / 4; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#home" aria-label="IAMLEGEND home">IAM<span>LEGEND</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">MENU ☰</button>
+      <nav class="navlinks" id="navLinks" aria-label="Main navigation">
+        <a href="#music">Music</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#connect">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div class="eyebrow" id="heroEyebrow">Independent artist · Official website</div>
+        <h1 id="artistHeading">IAM<span>LEGEND</span></h1>
+        <p id="heroBio">Music, visuals and thoughts from my world. Explore the latest releases, watch the videos, and follow the journey.</p>
+        <div class="actions"><a class="btn" href="#music">LISTEN TO THE MUSIC ↘</a><a class="btn secondary" href="#videos">WATCH VIDEOS</a></div>
+      </div>
+    </section>
+
+    <section id="music">
+      <div class="wrap">
+        <div class="section-head"><h2>Music</h2><p class="section-note">Listen to releases directly here. Add new tracks by updating the MUSIC list in the script below.</p></div>
+        <div class="grid" id="musicGrid"></div>
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="wrap">
+        <div class="section-head"><h2>Videos</h2><p class="section-note">Official music videos, visuals and other moving pictures.</p></div>
+        <div class="grid" id="videoGrid"></div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="section-head"><h2>Gallery</h2><p class="section-note">Portraits, behind-the-scenes moments, cover art and stills.</p></div>
+        <div class="grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head"><h2>About</h2><p class="section-note">A short introduction to the artist and the ideas behind the work.</p></div>
+        <p id="aboutText" style="max-width:760px;color:var(--muted);font-size:1.05rem">IAMLEGEND is an independent artist exploring the human experience through music and visuals. Replace this paragraph with your own story, influences and current projects.</p>
+      </div>
+    </section>
+
+    <section id="connect">
+      <div class="wrap">
+        <div class="section-head"><h2>Connect</h2><p class="section-note">Follow the official pages and keep up with new releases.</p></div>
+        <div class="socials" id="socialLinks"></div>
+        <div class="contact-panel" style="margin-top:28px">
+          <div><h3 style="margin:0">Bookings / collaborations</h3><p id="contactText">For bookings, features and other enquiries, send an email.</p></div>
+          <a class="btn" id="emailButton" href="mailto:you@example.com">GET IN TOUCH ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>© <span id="year"></span> <span id="footerArtist">IAMLEGEND</span>. All rights reserved.</span><a class="text-link" href="#home">BACK TO TOP ↑</a></div></footer>
+
+  <script>
+    /* =========================================================
+       CONFIG: EDIT THIS SECTION TO UPDATE YOUR WEBSITE
+
+       1. Put files into media/music, media/videos and media/photos.
+       2. Use paths such as "media/music/my-song.mp3" below.
+       3. For YouTube videos, use the EMBED URL, not the normal watch URL.
+       4. Replace the sample social URLs with your real profile links.
+       5. Save this file and refresh the browser.
+
+       Important: this is a static HTML website. It does not have a
+       private upload dashboard. To publish new media, upload the files
+       to your website host and update this list (or use a CMS later).
+       ========================================================= */
+    const CONFIG = {
+      artistName: "IAMLEGEND",
+      eyebrow: "Independent artist · Official website",
+      heroBio: "An independent voice exploring life, love, peace, greed, and the duality of human nature through raw, conscious, and unapologetic art. No gimmicks, just truth, vision, and legacy in the making.LEGENDARY",
+      about: "IAMLEGEND is an independdent artist who makes music for the underground scene in South Africa. Draws inspiration from Earl Sweatshirt, Mac Miller, The Alchemist, Nasty C among many others.",
+      email: "mdlamini132@egmail.com",
+      contact: "For bookings, features and other enquiries, send an email.",
+
+      // Add as many tracks as you like. Each audio file should be uploaded to your host.
+      music: [
+        { title: "1. Bob Marley", description: "ICONS · 2026", file: "media/songs/1.BOBMARLEY.mp3" },
+        { title: "2. Micahel Jordan", description: "ICONS · 2026", file: "media/songs/2.MICHAEL JORDAN.mp3" },
+        { title: "3. Iron Mike Tyson", description: "ICONS · 2026", file: "media/songs/3.IRONMIKETYSON.mp3" },
+        { title: "4. Saddam Hussein", description: "ICONS · 2026", file: "media/songs/4.SADDAMHUSSEIN.mp3" },
+        { title: "5. Hilter", description: "ICONS · 2026", file: "media/songs/5.HITLER.mp3" }
+      ],
+
+      // Use either file: "media/videos/video.mp4" OR youtube: "https://www.youtube.com/embed/VIDEO_ID".
+      videos: [
+        { title: "BOB MARLEY", description: "Official video", youtube: "https://youtu.be/OIsF90W2Rn4?si=NbRlUx08PoO3z1bQ" },
+        { title: "SADDAM HUSSEIN", description: "Official video", youtube: "https://youtu.be/OECt85VanyI?si=CSU-SJ-veiwXA3iO" }
+      ],
+
+      // Add photos or cover art. Use image paths inside media/photos.
+      photos: [
+        { title: "Artist Portrait", description: "Portrait photo", file: "media/photos/_DSC6173.jpg" },
+        { title: "IAMLEGEND", description: "IAMLEGEND", file: "media/photos/IMG_4359.jpg" },
+        { title: "Performance", description: "Performance", file: "media/photos/IMG_4657.jpg" }
+      ],
+
+      // Replace each # with your actual profile URL. Remove any platform you do not use.
+      socials: [
+        { name: "Instagram", url: "https://www.instagram.com/legend_rapstar?srtk=MWZyOHd5Z2FuYXBidg%3D%3D&utm_source=qr" },
+        { name: "TikTok", url: "https://www.tiktok.com/@iamlegenddlamini?_r=1&_t=ZS-9AV7htPAWrS/" },
+        { name: "Facebook", url: "https://www.facebook.com/share/1CPBgaf8sG/?mibextid=wwXIfr"},
+        { name: "YouTube", url: "https://youtube.com/@iamlegend655?si=Jvxy_NfpkK0j_e70" },
+        { name: "SoundCloud", url: "https://on.soundcloud.com/w8U4PaBet9NVE7URX7" }
+      ]
+    };
+
+    const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    const makePlaceholder = (message) => `<div class="placeholder">${escapeHTML(message)}<br><small>Add your media file in the CONFIG section.</small></div>`;
+
+    function renderMusic() {
+      const grid = document.getElementById("musicGrid");
+      grid.innerHTML = CONFIG.music.map(track => `
+        <article class="card audio-card">
+          <span class="tag">Audio release</span>
+          <h3>${escapeHTML(track.title)}</h3><p>${escapeHTML(track.description || "")}</p>
+          <audio controls preload="none"><source src="${escapeHTML(track.file)}" type="audio/mpeg">Your browser does not support audio playback.</audio>
+        </article>`).join("");
+    }
+    function renderVideos() {
+      const grid = document.getElementById("videoGrid");
+      grid.innerHTML = CONFIG.videos.map(video => {
+        const media = video.youtube
+          ? `<iframe src="${escapeHTML(video.youtube)}" title="${escapeHTML(video.title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+          : video.file
+            ? `<video controls preload="metadata"><source src="${escapeHTML(video.file)}" type="video/mp4">Your browser does not support video playback.</video>`
+            : makePlaceholder("Add a video file or YouTube embed URL");
+        return `<article class="card"><div class="video-frame">${media}</div><div class="card-body"><h3>${escapeHTML(video.title)}</h3><p>${escapeHTML(video.description || "")}</p></div></article>`;
+      }).join("");
+    }
+    function renderGallery() {
+      const grid = document.getElementById("galleryGrid");
+      grid.innerHTML = CONFIG.photos.map(photo => `
+        <article class="card"><div class="media-frame"><img src="${escapeHTML(photo.file)}" alt="${escapeHTML(photo.title)}" loading="lazy" onerror="this.outerHTML='${makePlaceholder("Photo not added yet").replace(/'/g, "&#39;")}'"></div>
+        <div class="card-body"><h3>${escapeHTML(photo.title)}</h3><p>${escapeHTML(photo.description || "")}</p></div></article>`).join("");
+    }
+    function renderSocials() {
+      document.getElementById("socialLinks").innerHTML = CONFIG.socials.filter(s => s.url && !s.url.endsWith("/YOUR_USERNAME")).map(s =>
+        `<a href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(s.name)} ↗</a>`).join("");
+    }
+    document.getElementById("artistHeading").innerHTML = escapeHTML(CONFIG.artistName).replace(/LEGEND/i, match => `<span>${match}</span>`);
+    document.getElementById("heroEyebrow").textContent = CONFIG.eyebrow;
+    document.getElementById("heroBio").textContent = CONFIG.heroBio;
+    document.getElementById("aboutText").textContent = CONFIG.about;
+    document.getElementById("contactText").textContent = CONFIG.contactText;
+    document.getElementById("emailButton").href = `mailto:${CONFIG.email}`;
+    document.getElementById("footerArtist").textContent = CONFIG.artistName;
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderMusic(); renderVideos(); renderGallery(); renderSocials();
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false");
+    }));
+  </script>
+</body>
+</html>
